@@ -11,4 +11,6 @@ app.config(['$routeProvider', function($routeProvider) {
 .controller('SharesCtrl', [function () {
   // TODO: load these via AJAX
   this.shares = [];
+
+  $http.get('http://')
 }]);

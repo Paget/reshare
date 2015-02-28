@@ -17,17 +17,79 @@ app.controller('MainNavCtrl',
 
 app.config(['$routeProvider', function($routeProvider) {
   var routeDefinition = {
+    templateUrl: 'shares/new-shares.html',
+    controller: 'NewSharesCtrl',
+    controllerAs: 'vm'
+  };
+
+  $routeProvider.when('/shares/new', routeDefinition);
+}])
+.controller('NewSharesCtrl', ['sharesService', 'Share', function (sharesService, Share) {
+
+//   this.shares = shares;
+// console.log(shares, "hello");
+  var self = this;
+
+  // self.shares = shares;
+
+  self.newShare = Share();
+
+  self.newShare.url = "http://";
+
+  self.addShare = function () {
+
+
+    // Make a copy of the 'newShare' object
+    var share = Share(self.newShare);
+
+console.log('hsre', share);
+    // Add the share to our service
+    sharesService.addShare(share);
+    // .then(function () {
+    //   // If the add succeeded, remove the user from the shares array
+    //   self.shares = self.shares.filter(function (existingShare) {
+    //     return existingShare.shareId !== share.shareId;
+    //   });
+    //
+    //   // Add the share to the shares array
+    //   self.shares.push(share);
+    // });
+
+    // Clear our newShare property
+    self.newShare = Share();
+  };
+}]);
+
+app.factory('Share', function () {
+  return function (spec) {
+    spec = spec || {};
+    return {
+      url: spec.url || '',
+      description: spec.description || ''
+    };
+  };
+});
+
+app.config(['$routeProvider', function($routeProvider) {
+  var routeDefinition = {
     templateUrl: 'shares/shares.html',
     controller: 'SharesCtrl',
-    controllerAs: 'vm'
+    controllerAs: 'vm',
+    resolve: {
+      shares: ['sharesService', function(sharesService) {
+        console.log('sharesService', sharesService.list());
+        return sharesService.list();
+      }]
+    }
   };
 
   $routeProvider.when('/', routeDefinition);
   $routeProvider.when('/shares', routeDefinition);
 }])
-.controller('SharesCtrl', [function () {
-  // TODO: load these via AJAX
-  this.shares = [];
+.controller('SharesCtrl', ['shares', 'sharesService', function (shares, sharesService) {
+console.log(shares, "hello");
+  this.shares = shares;
+
 }]);
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -109,6 +171,45 @@ app.factory('StringUtil', function() {
     }
   };
 });
+
+app.factory('sharesService', ['$http', '$q', '$log', function($http, $q, $log) {
+  // My $http promise then and catch always
+  // does the same thing, so I'll put the
+  // processing of it here. What you probably
+  // want to do instead is create a convenience object
+  // that makes $http calls for you in a standard
+  // way, handling post, put, delete, etc
+  function get(url) {
+    return processAjaxPromise($http.get(url));
+  }
+
+  function processAjaxPromise(p) {
+    return p.then(function (result) {
+      return result.data;
+    })
+    .catch(function (error) {
+      $log.log(error);
+    });
+  }
+
+  return {
+    list: function () {
+      return get('/api/res');
+    },
+
+    getByShareId: function (shareId) {
+      if (!shareId) {
+        throw new Error('getByShareId requires a share id');
+      }
+
+      return get('/api/res/:id' + shareId);
+    },
+
+    addShare: function (share) {
+      return processAjaxPromise($http.post('/api/res', share));
+    }
+  };
+}]);
 
 app.factory('usersService', ['$http', '$q', '$log', function($http, $q, $log) {
   // My $http promise then and catch always

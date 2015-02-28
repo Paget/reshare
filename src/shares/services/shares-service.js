@@ -28,11 +28,11 @@ app.factory('sharesService', ['$http', '$q', '$log', function($http, $q, $log) {
         throw new Error('getByShareId requires a share id');
       }
 
-      return get('/api/res/:id' + sharId);
+      return get('/api/res/:id' + shareId);
     },
 
-    addUser: function (user) {
-      return processAjaxPromise($http.post('/api/users', user));
+    addShare: function (share) {
+      return processAjaxPromise($http.post('/api/res', share));
     }
   };
 }]);

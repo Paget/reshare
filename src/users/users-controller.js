@@ -12,7 +12,7 @@ app.config(['$routeProvider', function($routeProvider) {
 
   $routeProvider.when('/users', routeDefinition);
 }])
-.controller('UsersCtrl', ['users', 'usersService', 'User', function (users, usersService, User) {
+.controller('UsersCtrl', ['users', 'usersService', 'User', function (users, usersService, User ) {
   var self = this;
 
   self.users = users;

@@ -6,7 +6,7 @@ app.config(['$routeProvider', function($routeProvider) {
     resolve: {
       shares: ['sharesService', function(sharesService) {
         console.log('sharesService', sharesService.list());
-        return sharesService.list();
+        return sharesService.list();  
       }]
     }
   };

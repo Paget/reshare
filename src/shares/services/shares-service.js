@@ -1,10 +1,5 @@
-app.factory('sharesService', ['$http', '$q', '$log', function($http, $q, $log) {
-  // My $http promise then and catch always
-  // does the same thing, so I'll put the
-  // processing of it here. What you probably
-  // want to do instead is create a convenience object
-  // that makes $http calls for you in a standard
-  // way, handling post, put, delete, etc
+app.factory('sharesService', ['$http', '$log', function($http, $log) {
+
   function get(url) {
     return processAjaxPromise($http.get(url));
   }

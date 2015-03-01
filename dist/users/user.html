@@ -6,3 +6,10 @@
 <p>
   Id: {{vm.user._id}}
 </p>
+<p>
+  Links:
+</p>
+<p ng-repeat="share in vm.userShares" | orderBy:"'url'">
+     <a href="{{share.url}}">{{share.url}}</a>
+      {{share.description}}
+</p>

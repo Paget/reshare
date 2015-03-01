@@ -1,44 +1,116 @@
+body {
+background: #ecdfbd;
+color: #3b3a35;
+font-family: 'Josefin Sans', sans-serif;
+font-size: 18px;
+}
+
 .root-content {
   padding: 2em;
 }
 
-.toolbar {
-  background: #F4F4F4;
-  padding: 1em;
-  margin-bottom: 1.5em;
-}
-
 .main-nav {
-  background: #6067b0;
+  background: #5e3448;
   color: #FFF;
   padding: 0 2em;
 }
 
-.app-icon {
-  color: inherit;
-}
-
-.app-icon:before {
-  content: 'b';
-  font-family: 'fontastic';
-  display: inline-block;
-  font-size: 2.5em;
-  padding-right: 0.5rem;
-  vertical-align: middle;
-  transform: rotate(-10deg);
+.title {
+  font-family: 'Sansita One', cursive;
+  font-size: 50px;
+  padding-right: 10em;
 }
 
 .main-nav-link {
   display: inline-block;
   padding: 1em 1em;
   color: inherit;
+  font-size: 30px;
+  text-decoration: none;
+  outline: none;
+}
+
+@media (max-width : 480px) {
+  .main-nav-link {
+    font-size: 22px;
+  }
 }
 
 .main-nav-link:hover {
-  background: $alt-accent-color;
+  background: #fb6648;
   color: inherit;
 }
 
 .main-nav-link.active {
-  background: #4d5196;
+  background: #20457c;
+}
+
+.main-nav-link {
+  margin: 0;
+}
+
+h1 {
+  font-family: 'Sansita One', cursive;
+  font-size: 28px;
+  padding-bottom: 1em;
+}
+
+li {
+  padding-top: 1em;
+  font-size: 25px;
+}
+
+
+input, textarea {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1em;
+  padding: 0.5em;
+  outline: none;
+}
+
+
+button {
+  font-family: 'Josefin Sans', sans-serif;
+  display: inline-block;
+  padding: 0.5em 0.75em;
+  border: 0;
+  background: #fb6648;
+  color: #FFF;
+  font-size: 1em;
+  outline: none;
+  border-radius: 0.25em;
+}
+
+button a {
+  color: #fff;
+}
+
+select {
+  height: 2em;
+  background: #20457c;
+  color: #FFF;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1em;
+  padding: 2em;
+  outline: none;
+}
+
+h3 {
+  font-size: 1.5em;
+  padding-bottom: 1em;
+}
+
+p {
+  padding-bottom: 1em;
+}
+
+.description {
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 300;
+  padding-top: 0.5em;
+}
+
+.add-thread, .add-user {
+  text-decoration: none;
 }

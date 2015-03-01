@@ -3,15 +3,15 @@
 
     <h1>{{vm.user.userId}}</h1>
 
+    <h3>Role:</h3>
     <p>
-      Role: {{vm.user.role}}
+       {{vm.user.role}}
     </p>
+    <h3>Id:</h3>
     <p>
-      Id: {{vm.user._id}}
+       {{vm.user._id}}
     </p>
-    <p>
-      Links:
-    </p>
+    <h3>Threads:</h3>
     <p ng-repeat="share in vm.userShares" | orderBy:"'url'">
          <a href="{{share.url}}">{{share.url}}</a>
           {{share.description}}

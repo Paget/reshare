@@ -1,4 +1,4 @@
-<h1>Users</h1>
+<h1 class="users">Users</h1>
 
 <form ng-submit="vm.addUser()">
   <input ng-model="vm.newUser.userId" placeholder="GitHub username">
@@ -10,11 +10,11 @@
       User
     </option>
   </select>
-  <button class="btn btn-default">+ Add User</button>
+  <button>+ Add User</button>
 </form>
 
 <ul>
   <li ng-repeat="user in vm.users | orderBy:'userId'">
-    <a href="#/users/{{user.userId}}">{{user.userId}}</a>
+    <a class="add-user" href="#/users/{{user.userId}}">{{user.userId}}</a>
   </li>
 </ul>

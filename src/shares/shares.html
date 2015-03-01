@@ -1,8 +1,12 @@
-<h1>Shares</h1>
+<h1>Threads</h1>
+  <button><a class="add-thread" href="#/shares/new">Add a Thread!</a></button>
+</div>
 
 <ul>
   <li ng-repeat="share in vm.shares" | orderBy:"'url'">
-    <a href="{{share.url}}">{{share.description}}</a>
+    <a href="{{share.url}}">{{share.url}}</a>
+    <p class="description">
+      {{share.description}}
+    </p>
   </li>
 </ul>
-<a href="#/shares/new" class="btn btn-success">Add a Thread!</a>

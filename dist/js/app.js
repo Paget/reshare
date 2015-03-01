@@ -105,10 +105,10 @@ app.config(['$routeProvider', function($routeProvider) {
       shares:['sharesService', '$route', function (sharesService, $route) {
         return sharesService.list().then(function(data){
           console.log(data);
-          return shares = data.filter(function(item){
+          shares = data.filter(function(item){
             return item.userId == $route.current.params.userid;
           });
-
+          return shares;
         });
       }]
     }

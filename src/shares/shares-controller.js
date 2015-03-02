@@ -5,8 +5,7 @@ app.config(['$routeProvider', function($routeProvider) {
     controllerAs: 'vm',
     resolve: {
       shares: ['sharesService', function(sharesService) {
-        console.log('sharesService', sharesService.list());
-        return sharesService.list();  
+        return sharesService.list();
       }]
     }
   };
@@ -15,7 +14,7 @@ app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/shares', routeDefinition);
 }])
 .controller('SharesCtrl', ['shares', 'sharesService', function (shares, sharesService) {
-console.log(shares, "hello");
+
   this.shares = shares;
 
 }]);

@@ -25,7 +25,6 @@ app.config(['$routeProvider', function($routeProvider) {
     // Make a copy of the 'newShare' object
     var share = Share(self.newShare);
 
-console.log('hsre', share);
     // Add the share to our service
     sharesService.addShare(share);
     // .then(function () {

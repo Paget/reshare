@@ -42,7 +42,6 @@ app.config(['$routeProvider', function($routeProvider) {
     // Make a copy of the 'newShare' object
     var share = Share(self.newShare);
 
-console.log('hsre', share);
     // Add the share to our service
     sharesService.addShare(share);
     // .then(function () {
@@ -77,8 +76,7 @@ app.config(['$routeProvider', function($routeProvider) {
     controllerAs: 'vm',
     resolve: {
       shares: ['sharesService', function(sharesService) {
-        console.log('sharesService', sharesService.list());
-        return sharesService.list();  
+        return sharesService.list();
       }]
     }
   };
@@ -87,7 +85,7 @@ app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/shares', routeDefinition);
 }])
 .controller('SharesCtrl', ['shares', 'sharesService', function (shares, sharesService) {
-console.log(shares, "hello");
+
   this.shares = shares;
 
 }]);

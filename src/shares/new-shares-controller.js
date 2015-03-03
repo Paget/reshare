@@ -9,11 +9,8 @@ app.config(['$routeProvider', function($routeProvider) {
 }])
 .controller('NewSharesCtrl', ['sharesService', 'Share', function (sharesService, Share) {
 
-//   this.shares = shares;
-// console.log(shares, "hello");
   var self = this;
 
-  // self.shares = shares;
 
   self.newShare = Share();
 
@@ -39,5 +36,6 @@ app.config(['$routeProvider', function($routeProvider) {
 
     // Clear our newShare property
     self.newShare = Share();
+    self.newShare.url = "http://";
   };
 }]);

@@ -1,7 +1,4 @@
-<div class="container">
-  <div class="text-center">
-
-    <h1>{{vm.user.userId}}</h1>
+  <h1>{{vm.user.userId}}</h1>
 
     <h3>Role:</h3>
     <p>
@@ -15,7 +12,5 @@
     <p ng-repeat="share in vm.userShares" | orderBy:"'url'">
          <a href="{{share.url}}">{{share.url}}</a>
           {{share.description}}
+         <button class="delete" ng-click="vm.removeShare(share._id)">X</button>
     </p>
-
-    </div>
-</div>

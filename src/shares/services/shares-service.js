@@ -4,6 +4,10 @@ app.factory('sharesService', ['$http', '$log', function($http, $log) {
     return processAjaxPromise($http.get(url));
   }
 
+  function remove(url) {
+    return processAjaxPromise($http.delete(url));
+  }
+
   function processAjaxPromise(p) {
     return p.then(function (result) {
       return result.data;
@@ -28,6 +32,19 @@ app.factory('sharesService', ['$http', '$log', function($http, $log) {
 
     addShare: function (share) {
       return processAjaxPromise($http.post('/api/res', share));
+    },
+
+    removeShare: function (shareId) {
+      if (!shareId) {
+        throw new Error('removeShare requires a share id');
+      }
+
+      return remove('/api/res/' + shareId);
+    },
+
+    voteShare: function (vote) {
+
+      return processAjaxPromise($http.post('/api/res/:id/votes', vote));
     }
   };
 }]);

@@ -3,7 +3,7 @@
 </div>
 
 <ul>
-  <li ng-repeat="share in vm.shares" | orderBy:"'url'">
+  <li ng-repeat="share in vm.shares">
     <a href="{{share.url}}">{{share.url}}</a>
     <p class="description">
       {{share.description}}

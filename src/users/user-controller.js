@@ -22,7 +22,32 @@ app.config(['$routeProvider', function($routeProvider) {
 
   $routeProvider.when('/users/:userid', routeDefinition);
 }])
-.controller('UserCtrl', ['user', 'shares', function (user, shares) {
-  this.user = user;
-  this.userShares = shares;
+.controller('UserCtrl', ['user', 'shares', 'sharesService', function (user, shares, sharesService) {
+
+  var self = this;
+
+  self.user = user;
+
+  self.userShares = shares;
+
+  self.removeShare = function (shareId) {
+
+    sharesService.removeShare(shareId).then(function(success){
+
+      if (success === 1) {
+
+        var updatedShares = self.userShares.filter(function(item){
+
+          return item._id !== shareId;
+
+        });
+
+        self.userShares = updatedShares;
+
+      }
+
+    });
+
+  }
+
 }]);

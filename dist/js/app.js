@@ -26,11 +26,8 @@ app.config(['$routeProvider', function($routeProvider) {
 }])
 .controller('NewSharesCtrl', ['sharesService', 'Share', function (sharesService, Share) {
 
-//   this.shares = shares;
-// console.log(shares, "hello");
   var self = this;
 
-  // self.shares = shares;
 
   self.newShare = Share();
 
@@ -56,6 +53,7 @@ app.config(['$routeProvider', function($routeProvider) {
 
     // Clear our newShare property
     self.newShare = Share();
+    self.newShare.url = "http://";
   };
 }]);
 
@@ -114,9 +112,34 @@ app.config(['$routeProvider', function($routeProvider) {
 
   $routeProvider.when('/users/:userid', routeDefinition);
 }])
-.controller('UserCtrl', ['user', 'shares', function (user, shares) {
-  this.user = user;
-  this.userShares = shares;
+.controller('UserCtrl', ['user', 'shares', 'sharesService', function (user, shares, sharesService) {
+
+  var self = this;
+
+  self.user = user;
+
+  self.userShares = shares;
+
+  self.removeShare = function (shareId) {
+
+    sharesService.removeShare(shareId).then(function(success){
+
+      if (success === 1) {
+
+        var updatedShares = self.userShares.filter(function(item){
+
+          return item._id !== shareId;
+
+        });
+
+        self.userShares = updatedShares;
+
+      }
+
+    });
+
+  }
+
 }]);
 
 app.factory('User', function () {
@@ -186,6 +209,10 @@ app.factory('sharesService', ['$http', '$log', function($http, $log) {
     return processAjaxPromise($http.get(url));
   }
 
+  function remove(url) {
+    return processAjaxPromise($http.delete(url));
+  }
+
   function processAjaxPromise(p) {
     return p.then(function (result) {
       return result.data;
@@ -210,6 +237,19 @@ app.factory('sharesService', ['$http', '$log', function($http, $log) {
 
     addShare: function (share) {
       return processAjaxPromise($http.post('/api/res', share));
+    },
+
+    removeShare: function (shareId) {
+      if (!shareId) {
+        throw new Error('removeShare requires a share id');
+      }
+
+      return remove('/api/res/' + shareId);
+    },
+
+    voteShare: function (vote) {
+
+      return processAjaxPromise($http.post('/api/res/:id/votes', vote));
     }
   };
 }]);

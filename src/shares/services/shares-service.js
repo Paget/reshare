@@ -42,9 +42,9 @@ app.factory('sharesService', ['$http', '$log', function($http, $log) {
       return remove('/api/res/' + shareId);
     },
 
-    voteShare: function (vote) {
-
-      return processAjaxPromise($http.post('/api/res/:id/votes', vote));
+    voteShare: function (share, vote) {
+      console.log("hello", share, vote);
+      return processAjaxPromise($http.post('/api/res/'+ share._id +'/votes', vote));
     }
   };
 }]);

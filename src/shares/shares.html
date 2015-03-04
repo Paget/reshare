@@ -8,5 +8,9 @@
     <p class="description">
       {{share.description}}
     </p>
+    <button ng-click="vm.upVote(share)">x</button>
+    {{share.upvotes}}
+    <button ng-click="vm.downVote(share)">x</button>
+    {{share.downvotes}}
   </li>
 </ul>

@@ -83,8 +83,21 @@ app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/shares', routeDefinition);
 }])
 .controller('SharesCtrl', ['shares', 'sharesService', function (shares, sharesService) {
+  var self = this;
 
-  this.shares = shares;
+  self.shares = shares;
+
+  self.upVote = function(share) {
+  share.upvotes += 1;
+  sharesService.voteShare(share, {vote: 1});
+};
+
+  self.downVote = function(share) {
+  console.log("trying", share);
+  sharesService.voteShare(share, {vote: -1});
+};
+
+  //self.clearVotes
 
 }]);
 
@@ -247,9 +260,9 @@ app.factory('sharesService', ['$http', '$log', function($http, $log) {
       return remove('/api/res/' + shareId);
     },
 
-    voteShare: function (vote) {
-
-      return processAjaxPromise($http.post('/api/res/:id/votes', vote));
+    voteShare: function (share, vote) {
+      console.log("hello", share, vote);
+      return processAjaxPromise($http.post('/api/res/'+ share._id +'/votes', vote));
     }
   };
 }]);

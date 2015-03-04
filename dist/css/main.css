@@ -173,5 +173,9 @@ p {
 .add-thread, .add-user {
   text-decoration: none; }
 
+.vote {
+  background: none;
+  color: #fb6648; }
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important; }

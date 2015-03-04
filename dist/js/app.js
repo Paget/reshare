@@ -88,16 +88,30 @@ app.config(['$routeProvider', function($routeProvider) {
   self.shares = shares;
 
   self.upVote = function(share) {
-  share.upvotes += 1;
-  sharesService.voteShare(share, {vote: 1});
+
+  sharesService.voteShare(share, {vote: 1}).then(function () {
+    return sharesService.getByShareId(share._id).then(function (updatedShare) {
+      share.upvotes = updatedShare.upvotes;
+      share.downvotes = updatedShare.downvotes;
+    });
+    // Get the latest version of share from the server
+    // Once you've gotten it, update share.upvotes and share.downvotes
+  });
 };
 
   self.downVote = function(share) {
-  console.log("trying", share);
-  sharesService.voteShare(share, {vote: -1});
+
+  sharesService.voteShare(share, {vote: -1}).then(function () {
+    return sharesService.getByShareId(share._id).then(function(updatedShare){
+      share.upvotes = updatedShare.upvotes;
+      share.downvotes = updatedShare.downvotes;
+    });
+  });
 };
 
-  //self.clearVotes
+//   self.clearVotes = function(share) {
+//   sharesService.clearVote(share, {vote: 0});
+// };
 
 }]);
 
@@ -245,7 +259,7 @@ app.factory('sharesService', ['$http', '$log', function($http, $log) {
         throw new Error('getByShareId requires a share id');
       }
 
-      return get('/api/res/:id' + shareId);
+      return get('/api/res/' + shareId);
     },
 
     addShare: function (share) {

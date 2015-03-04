@@ -27,7 +27,7 @@ app.factory('sharesService', ['$http', '$log', function($http, $log) {
         throw new Error('getByShareId requires a share id');
       }
 
-      return get('/api/res/:id' + shareId);
+      return get('/api/res/' + shareId);
     },
 
     addShare: function (share) {
